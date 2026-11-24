@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://5gmo22u3dab6"]
+
+[ext_resource type="Script" uid="uid://dtvbi86o6807x" path="res://samples/chat/room.gd" id="1"]
+[ext_resource type="Script" uid="uid://ddxq5hhnwsr2k" path="res://addons/rgd/runtime/remote_event.gd" id="2"]
+[ext_resource type="Script" uid="uid://ds5u6kveejs0k" path="res://samples/chat/history.gd" id="3"]
+[ext_resource type="Script" uid="uid://b4g8lm808stf5" path="res://samples/chat/say.gd" id="4"]
+
+[node name="Room" type="Node" unique_id=1496918869]
+script = ExtResource("1")
+metadata/rgd_player_scene = "res://samples/chat/player.tscn"
+metadata/rgd_menu_scene = "res://samples/chat/menu.tscn"
+
+[node name="Say" type="Node" parent="." unique_id=750973582]
+script = ExtResource("4")
+
+[node name="Typing" type="Node" parent="." unique_id=291328955]
+script = ExtResource("2")
+rate_limit = 20
+
+[node name="History" type="Node" parent="." unique_id=1853840235]
+script = ExtResource("3")
+rate_limit = 5
+
+[connection signal="on_server_event" from="Say" to="." method="_on_say"]
+[connection signal="on_server_event" from="Typing" to="." method="_on_typing"]
